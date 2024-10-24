@@ -160,18 +160,19 @@ class CBAMViT(nn.Module):
         self.spatial_weighter = nn.Linear(num_patches * dim, image_height * image_width)
 
     def forward(self, img):
-        # print(f'image shape: {img.shape}')
+        print(f'image shape: {img.shape}')
         x = self.to_patch_embedding(img)
-        # print(f'patch embedding shape: {x.shape}')
+        print(f'patch embedding shape: {x.shape}')
         b, n, _ = x.shape
 
         cls_tokens = repeat(self.cls_token, '1 1 d -> b 1 d', b = b)
         x = torch.cat((cls_tokens, x), dim=1)
+        print(f'concatenated shape: {x.shape}')
         x += self.pos_embedding[:, :(n + 1)]
+        print(f'after positinal embd shape: {x.shape}')
         x = self.dropout(x)
-        # print(f'concatenated shape: {x.shape}')
         x = self.transformer(x)
-        # print(f'transformer output shape: {x.shape}')
+        print(f'transformer output shape: {x.shape}')
 
         output = self.spatial_weighter(x[:, 1:, :].view(b, -1))
 
