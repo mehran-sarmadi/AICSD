@@ -1,0 +1,15 @@
+{"time":"2024-10-24T18:38:29.701235412+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-24T18:38:29.701255728+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/wandb/offline-run-20241024_183829-mkn9gvca/logs/debug-core.log"}
+{"time":"2024-10-24T18:38:29.814814183+03:30","level":"INFO","msg":"created new stream","id":"mkn9gvca"}
+{"time":"2024-10-24T18:38:29.815009048+03:30","level":"INFO","msg":"stream: started","id":"mkn9gvca"}
+{"time":"2024-10-24T18:38:29.815325922+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"mkn9gvca"}}
+{"time":"2024-10-24T18:38:29.815685795+03:30","level":"INFO","msg":"sender: started","stream_id":"mkn9gvca"}
+{"time":"2024-10-24T18:38:29.815683271+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"mkn9gvca"}}
+{"time":"2024-10-24T18:38:29.834172285+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-24T18:38:36.908892216+03:30","level":"INFO","msg":"stream: closing","id":"mkn9gvca"}
+{"time":"2024-10-24T18:38:36.913949634+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-24T18:38:36.930050194+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-24T18:38:36.932514122+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"mkn9gvca"}}
+{"time":"2024-10-24T18:38:36.932411794+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"mkn9gvca"}}
+{"time":"2024-10-24T18:38:36.933067429+03:30","level":"INFO","msg":"sender: closed","stream_id":"mkn9gvca"}
+{"time":"2024-10-24T18:38:36.933097828+03:30","level":"INFO","msg":"stream: closed","id":"mkn9gvca"}

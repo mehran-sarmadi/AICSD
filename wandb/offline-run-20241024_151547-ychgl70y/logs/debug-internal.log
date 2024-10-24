@@ -1,0 +1,15 @@
+{"time":"2024-10-24T15:15:47.301604899+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-24T15:15:47.301642856+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/wandb/offline-run-20241024_151547-ychgl70y/logs/debug-core.log"}
+{"time":"2024-10-24T15:15:47.405760485+03:30","level":"INFO","msg":"created new stream","id":"ychgl70y"}
+{"time":"2024-10-24T15:15:47.405781432+03:30","level":"INFO","msg":"stream: started","id":"ychgl70y"}
+{"time":"2024-10-24T15:15:47.405837973+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"ychgl70y"}}
+{"time":"2024-10-24T15:15:47.405866207+03:30","level":"INFO","msg":"sender: started","stream_id":"ychgl70y"}
+{"time":"2024-10-24T15:15:47.405883317+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ychgl70y"}}
+{"time":"2024-10-24T15:15:47.4121023+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-24T15:29:14.001100033+03:30","level":"INFO","msg":"stream: closing","id":"ychgl70y"}
+{"time":"2024-10-24T15:29:14.001180493+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-24T15:29:14.007182371+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-24T15:29:14.010016954+03:30","level":"INFO","msg":"sender: closed","stream_id":"ychgl70y"}
+{"time":"2024-10-24T15:29:14.010005808+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ychgl70y"}}
+{"time":"2024-10-24T15:29:14.009940308+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"ychgl70y"}}
+{"time":"2024-10-24T15:29:14.010547117+03:30","level":"INFO","msg":"stream: closed","id":"ychgl70y"}

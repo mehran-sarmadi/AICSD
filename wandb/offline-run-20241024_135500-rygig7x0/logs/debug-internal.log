@@ -1,0 +1,15 @@
+{"time":"2024-10-24T13:55:00.726341954+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-24T13:55:00.726363449+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/wandb/offline-run-20241024_135500-rygig7x0/logs/debug-core.log"}
+{"time":"2024-10-24T13:55:00.832920338+03:30","level":"INFO","msg":"created new stream","id":"rygig7x0"}
+{"time":"2024-10-24T13:55:00.833015494+03:30","level":"INFO","msg":"stream: started","id":"rygig7x0"}
+{"time":"2024-10-24T13:55:00.833284858+03:30","level":"INFO","msg":"sender: started","stream_id":"rygig7x0"}
+{"time":"2024-10-24T13:55:00.833267946+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"rygig7x0"}}
+{"time":"2024-10-24T13:55:00.833394996+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"rygig7x0"}}
+{"time":"2024-10-24T13:55:00.85435776+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-24T13:55:04.108353597+03:30","level":"INFO","msg":"stream: closing","id":"rygig7x0"}
+{"time":"2024-10-24T13:55:04.108371616+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-24T13:55:04.108613533+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-24T13:55:04.10870121+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"rygig7x0"}}
+{"time":"2024-10-24T13:55:04.108713961+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"rygig7x0"}}
+{"time":"2024-10-24T13:55:04.108715632+03:30","level":"INFO","msg":"sender: closed","stream_id":"rygig7x0"}
+{"time":"2024-10-24T13:55:04.108761357+03:30","level":"INFO","msg":"stream: closed","id":"rygig7x0"}

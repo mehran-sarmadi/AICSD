@@ -1,0 +1,15 @@
+{"time":"2024-10-21T08:56:26.081403446+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-21T08:56:26.081434668+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/wandb/offline-run-20241021_085626-zjrovt4f/logs/debug-core.log"}
+{"time":"2024-10-21T08:56:26.187606411+03:30","level":"INFO","msg":"created new stream","id":"zjrovt4f"}
+{"time":"2024-10-21T08:56:26.187671905+03:30","level":"INFO","msg":"stream: started","id":"zjrovt4f"}
+{"time":"2024-10-21T08:56:26.187694042+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"zjrovt4f"}}
+{"time":"2024-10-21T08:56:26.187769619+03:30","level":"INFO","msg":"sender: started","stream_id":"zjrovt4f"}
+{"time":"2024-10-21T08:56:26.187870173+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"zjrovt4f"}}
+{"time":"2024-10-21T08:56:26.202909377+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-21T08:56:26.353844368+03:30","level":"INFO","msg":"stream: closing","id":"zjrovt4f"}
+{"time":"2024-10-21T08:56:26.353867952+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-21T08:56:26.354315506+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-21T08:56:26.354428982+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"zjrovt4f"}}
+{"time":"2024-10-21T08:56:26.354439095+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"zjrovt4f"}}
+{"time":"2024-10-21T08:56:26.354458142+03:30","level":"INFO","msg":"sender: closed","stream_id":"zjrovt4f"}
+{"time":"2024-10-21T08:56:26.354474734+03:30","level":"INFO","msg":"stream: closed","id":"zjrovt4f"}

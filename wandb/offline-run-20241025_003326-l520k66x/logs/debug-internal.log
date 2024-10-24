@@ -1,0 +1,15 @@
+{"time":"2024-10-25T00:33:26.216822295+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-25T00:33:26.216836825+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD-v1/wandb/offline-run-20241025_003326-l520k66x/logs/debug-core.log"}
+{"time":"2024-10-25T00:33:26.322826559+03:30","level":"INFO","msg":"created new stream","id":"l520k66x"}
+{"time":"2024-10-25T00:33:26.322985485+03:30","level":"INFO","msg":"stream: started","id":"l520k66x"}
+{"time":"2024-10-25T00:33:26.323400945+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"l520k66x"}}
+{"time":"2024-10-25T00:33:26.323505251+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"l520k66x"}}
+{"time":"2024-10-25T00:33:26.323650162+03:30","level":"INFO","msg":"sender: started","stream_id":"l520k66x"}
+{"time":"2024-10-25T00:33:26.336026759+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-25T00:33:39.070325451+03:30","level":"INFO","msg":"stream: closing","id":"l520k66x"}
+{"time":"2024-10-25T00:33:39.07036212+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-25T00:33:39.070704627+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-25T00:33:39.070797514+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"l520k66x"}}
+{"time":"2024-10-25T00:33:39.070808648+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"l520k66x"}}
+{"time":"2024-10-25T00:33:39.070827733+03:30","level":"INFO","msg":"sender: closed","stream_id":"l520k66x"}
+{"time":"2024-10-25T00:33:39.070846674+03:30","level":"INFO","msg":"stream: closed","id":"l520k66x"}

@@ -1,0 +1,56 @@
+{
+  "os":  "Linux-6.8.0-47-generic-x86_64-with-glibc2.35",
+  "python":  "3.10.12",
+  "startedAt":  "2024-10-24T10:38:19.451452Z",
+  "args":  [
+    "--backbone",
+    "resnet18",
+    "--dataset",
+    "pascal",
+    "--epochs",
+    "50",
+    "--teacher_path",
+    "/home/mehran/PERSONAL-DIR/ai/term-4/dip/project/deeplab-resnet.pth.tar",
+    "--batch-size",
+    "2",
+    "--vit_lambda",
+    "1"
+  ],
+  "program":  "/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/train_kd.py",
+  "codePath":  "train_kd.py",
+  "git":  {
+    "remote":  "https://github.com/AmirMansurian/AICSD.git",
+    "commit":  "1afbe1acdfa5d6cb227cee8a72f1212f3ae48c59"
+  },
+  "root":  "/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD",
+  "host":  "Work",
+  "username":  "mehran",
+  "executable":  "/usr/bin/python3",
+  "codePathLocal":  "train_kd.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  12,
+  "gpu":  "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "502392610816",
+      "used":  "410259374080"
+    }
+  },
+  "memory":  {
+    "total":  "16456056832"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  12
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "memoryTotal":  "6439305216",
+      "cudaCores":  2560,
+      "architecture":  "Ada"
+    }
+  ],
+  "cudaVersion":  "12.2"
+}

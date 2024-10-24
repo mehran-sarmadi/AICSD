@@ -1,0 +1,15 @@
+{"time":"2024-10-24T18:40:53.156773444+03:30","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-24T18:40:53.156801412+03:30","level":"INFO","msg":"created symlink","path":"/home/mehran/PERSONAL-DIR/ai/thesis/test-new-ideas/vit-idea/AICSD/wandb/offline-run-20241024_184053-de7gai5u/logs/debug-core.log"}
+{"time":"2024-10-24T18:40:53.262256147+03:30","level":"INFO","msg":"created new stream","id":"de7gai5u"}
+{"time":"2024-10-24T18:40:53.262276867+03:30","level":"INFO","msg":"stream: started","id":"de7gai5u"}
+{"time":"2024-10-24T18:40:53.26234022+03:30","level":"INFO","msg":"handler: started","stream_id":{"value":"de7gai5u"}}
+{"time":"2024-10-24T18:40:53.262686021+03:30","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"de7gai5u"}}
+{"time":"2024-10-24T18:40:53.262692157+03:30","level":"INFO","msg":"sender: started","stream_id":"de7gai5u"}
+{"time":"2024-10-24T18:40:53.269511583+03:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-24T18:41:08.672080147+03:30","level":"INFO","msg":"stream: closing","id":"de7gai5u"}
+{"time":"2024-10-24T18:41:08.675110963+03:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-24T18:41:08.683210105+03:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-24T18:41:08.686455249+03:30","level":"INFO","msg":"sender: closed","stream_id":"de7gai5u"}
+{"time":"2024-10-24T18:41:08.686224003+03:30","level":"INFO","msg":"handler: closed","stream_id":{"value":"de7gai5u"}}
+{"time":"2024-10-24T18:41:08.686065958+03:30","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"de7gai5u"}}
+{"time":"2024-10-24T18:41:08.686910266+03:30","level":"INFO","msg":"stream: closed","id":"de7gai5u"}
