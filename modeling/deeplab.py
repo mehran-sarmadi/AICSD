@@ -38,6 +38,7 @@ class DeepLab(nn.Module):
                         dropout = 0.1,
                         emb_dropout = 0.1
                     )
+        print('doing with CBANViT ....')
 
         if freeze_bn:
             self.freeze_bn()
@@ -47,7 +48,7 @@ class DeepLab(nn.Module):
         x = self.aspp(x)
         channel_attn, spatial_attn = self.cbam_vit(x)
         x = x + (x * channel_attn.view(x.size(0), -1, 1, 1)) * spatial_attn.view(x.size(0), 1, 33, 33) 
-        print(f"\n\\n\ndeeplab decoder output shape \n\n: {x.shape}")
+        # print(f"\n\\n\ndeeplab decoder output shape \n\n: {x.shape}")
         x = self.decoder(x, low_level_feat)
         x = F.interpolate(x, size=input.size()[2:], mode='bilinear', align_corners=True)
 
@@ -98,7 +99,7 @@ class DeepLab(nn.Module):
         feats, x, low_level_feat = self.backbone.extract_feature(input)
         feat, x = self.aspp.extract_feature(x)
         feats += feat
-        print(f"\n\\n\ndeeplab decoder output shape \n\n: {feat[-1].shape}")
+        # print(f"\n\\n\ndeeplab decoder output shape \n\n: {feat[-1].shape}")
 
         feat, x = self.decoder.extract_feature(x, low_level_feat)
         feats += feat
