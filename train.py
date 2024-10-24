@@ -126,20 +126,20 @@ class Trainer(object):
         tbar = tqdm(self.val_loader, desc='\r')
         test_loss = 0.0
         for i, sample in enumerate(tbar):
-            print(sample['image'].shape)
-            # image, target = sample['image'], sample['label']
-            # if self.args.cuda:
-            #     image, target = image.cuda(), target.cuda()
-            # with torch.no_grad():
-            #     output = self.model(image)
-            # loss = self.criterion(output, target)
-            # test_loss += loss.item()
-            # tbar.set_description('Test loss: %.3f' % (test_loss / (i + 1)))
-            # pred = output.data.cpu().numpy()
-            # target = target.cpu().numpy()
-            # pred = np.argmax(pred, axis=1)
-            # # Add batch sample into evaluator
-            # self.evaluator.add_batch(target, pred)
+            # print(sample['image'].shape)
+            image, target = sample['image'], sample['label']
+            if self.args.cuda:
+                image, target = image.cuda(), target.cuda()
+            with torch.no_grad():
+                output = self.model(image)
+            loss = self.criterion(output, target)
+            test_loss += loss.item()
+            tbar.set_description('Test loss: %.3f' % (test_loss / (i + 1)))
+            pred = output.data.cpu().numpy()
+            target = target.cpu().numpy()
+            pred = np.argmax(pred, axis=1)
+            # Add batch sample into evaluator
+            self.evaluator.add_batch(target, pred)
 
         # Fast test during the training
         Acc = self.evaluator.Pixel_Accuracy()
@@ -274,7 +274,7 @@ def main():
     print('Starting Epoch:', trainer.args.start_epoch)
     print('Total Epoches:', trainer.args.epochs)
     for epoch in range(trainer.args.start_epoch, trainer.args.epochs):
-        # trainer.training(epoch)
+        trainer.training(epoch)
         if not trainer.args.no_val and epoch % args.eval_interval == (args.eval_interval - 1):
             trainer.validation(epoch)
 
