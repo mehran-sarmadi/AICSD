@@ -294,13 +294,13 @@ def main():
             
             
      
-    wandb.init(project="Knowledge Deistillation", entity="ipl_runs", name="feature maps",
-      config={
-      "learning_rate": 0.007,
-      "architecture": "DeepLab",
-      "dataset": "PascalVoc 2012",
-      "epochs": 120,
-      })
+    # wandb.init(project="Knowledge Deistillation", entity="ipl_runs", name="feature maps",
+    #   config={
+    #   "learning_rate": 0.007,
+    #   "architecture": "DeepLab",
+    #   "dataset": "PascalVoc 2012",
+    #   "epochs": 120,
+    #   })
     
     
     
