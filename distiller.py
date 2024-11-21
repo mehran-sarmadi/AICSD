@@ -5,6 +5,7 @@ from scipy.stats import norm
 import scipy
 import numpy as np
 import math
+from simam import *
 
 
 def L2(f_):
@@ -83,66 +84,39 @@ class Distiller(nn.Module):
         self.criterion = sim_dis_compute
         self.temperature = 1
         self.scale = 0.5
+        self.simam = simam_module(256)
 
     def forward(self, x):
 
         t_feats, t_out = self.t_net.extract_feature(x)
         s_feats, s_out = self.s_net.extract_feature(x)
+        
         feat_num = len(t_feats)
+        # for idx in range(feat_num):
+        #     print()
+        #     print(idx)
+        #     print(t_feats[idx].shape, s_feats[idx].shape) 
 
-        pa_loss = 0 
-        if self.args.pa_lambda is not None: # pairwise loss
-          feat_T = t_feats[4]
-          feat_S = s_feats[4]
-          total_w, total_h = feat_T.shape[2], feat_T.shape[3]
-          patch_w, patch_h = int(total_w*self.scale), int(total_h*self.scale)
-          maxpool = nn.MaxPool2d(kernel_size=(patch_w, patch_h), stride=(patch_w, patch_h), padding=0, ceil_mode=True) # change
-          pa_loss = self.args.pa_lambda * self.criterion(maxpool(feat_S), maxpool(feat_T))
-   
 
-        pi_loss = 0
-        if self.args.pi_lambda is not None: # pixelwise loss
-          #TF = F.normalize(t_feats[5].pow(2).mean(1)) 
-          #SF = F.normalize(s_feats[5].pow(2).mean(1)) 
-          #pi_loss = self.args.pi_lambda * (TF - SF).pow(2).mean()
-          pi_loss =  self.args.pi_lambda * torch.nn.KLDivLoss()(F.log_softmax(s_out / self.temperature, dim=1), F.softmax(t_out / self.temperature, dim=1))
-        
-        
-        ic_loss = 0
-        if self.args.ic_lambda is not None: #logits loss
-          b, c, h, w = s_out.shape
-          s_logit = torch.reshape(s_out, (b, c, h*w))
-          t_logit = torch.reshape(t_out, (b, c, h*w))
+        both_simmam_loss = 0 
+        if self.args.both_simmam_loss is not None:
+            t_simam = self.simam(t_feats[-1])
+            s_simam = self.simam(s_feats[-1])
+            b,c,h,w = t_simam.shape
+            both_simmam_loss = self.args.both_simmam_loss * (s_simam / torch.norm(s_simam, p = 2) - t_simam / torch.norm(t_simam, p = 2)).pow(2).sum() / (b)
 
-          ICCT = torch.bmm(t_logit, t_logit.permute(0,2,1))
-          ICCT = torch.nn.functional.normalize(ICCT, dim = 2)
+        t_simmam_loss = 0 
+        if self.args.t_simmam_loss is not None:
+            t_simam = self.simam(t_feats[-1])
+            b,c,h,w = t_simam.shape
+            t_simmam_loss = self.args.t_simmam_loss * (s_feats[-1] / torch.norm(s_feats[-1], p = 2) - t_simam / torch.norm(t_simam, p = 2)).pow(2).sum() / (b)
 
-          ICCS = torch.bmm(s_logit, s_logit.permute(0,2,1))
-          ICCS = torch.nn.functional.normalize(ICCS, dim = 2)
+        both_simmam_kld_loss = 0 
+        if self.args.both_simmam_kld_loss is not None:
+            t_simam = self.simam(t_feats[-1])
+            s_simam = self.simam(s_feats[-1])
+            both_simmam_kld_loss =  self.args.both_simmam_kld_loss * torch.nn.KLDivLoss()(F.log_softmax(t_simam / self.temperature, dim=1), F.softmax(s_simam / self.temperature, dim=1))
 
-          G_diff = ICCS - ICCT
-          ic_loss = self.args.ic_lambda * (G_diff * G_diff).view(b, -1).sum() / (c*b)
-        
-        
-        
-        lo_loss = 0
-        if self.args.lo_lambda is not None: 
-          b, c, h, w = s_out.shape
-          s_logit = torch.reshape(s_out, (b, c, h*w))
-          t_logit = torch.reshape(t_out, (b, c, h*w))
+        # print(both_simmam_loss, t_simmam_loss, both_simmam_kld_loss)
+        return s_out, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss
 
-          s_logit = F.softmax(s_out / self.temperature, dim=2)
-          t_logit = F.softmax(t_out / self.temperature, dim=2)
-          kl = torch.nn.KLDivLoss(reduction="batchmean")
-          ICCS = torch.empty((21,21)).cuda()
-          ICCT = torch.empty((21,21)).cuda()
-          for i in range(21):
-            for j in range(i, 21):
-              ICCS[j, i] = ICCS[i, j] = kl(s_logit[:, i], s_logit[:, j])
-              ICCT[j, i] = ICCT[i, j] = kl(t_logit[:, i], t_logit[:, j])
-
-          ICCS = torch.nn.functional.normalize(ICCS, dim = 1)
-          ICCT = torch.nn.functional.normalize(ICCT, dim = 1)
-          lo_loss =  self.args.lo_lambda * (ICCS - ICCT).pow(2).mean()/b 
-
-        return s_out, pa_loss, pi_loss, ic_loss, lo_loss
