@@ -109,10 +109,10 @@ class Trainer(object):
         tbar = tqdm(self.train_loader)
         num_img_tr = len(self.train_loader)
 
-        if epoch == 0:
-            optimizer = self.init_optimizer
-        else:
-            optimizer = self.optimizer
+        # if epoch == 0:
+        #     optimizer = self.init_optimizer
+        # else:
+        optimizer = self.optimizer
 
         for i, sample in enumerate(tbar):
             image, target = sample['image'], sample['label']
@@ -122,15 +122,15 @@ class Trainer(object):
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
             
-            output, pa_loss, pi_loss, ic_loss, lo_loss = self.d_net(image)
+            output, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss = self.d_net(image)
             loss_seg = self.criterion(output, target)
-            
+            # print(loss_seg, loss_simam)
             ########### uncomment lines below for ALW ##################
             #alpha = epoch/120
             #loss = alpha * (loss_seg + lo_loss) + (1-alpha) * pi_loss
             
             ############# Comment line blow in case of ALW ################
-            loss = loss_seg + pa_loss + pi_loss + lo_loss 
+            loss = loss_seg + both_simmam_loss + t_simmam_loss + both_simmam_kld_loss
             
             loss.backward()
             optimizer.step()
@@ -139,7 +139,7 @@ class Trainer(object):
 
         print('[Epoch: %d, numImages: %5d]' % (epoch, i * self.args.batch_size + image.data.shape[0]))
         print('Loss: %.3f' % train_loss)
-        wandb.log({"train loss": train_loss})
+        # wandb.log({"train loss": train_loss})
 
         if self.args.no_val:
             # save checkpoint every epoch
@@ -180,7 +180,7 @@ class Trainer(object):
         print('[Epoch: %d, numImages: %5d]' % (epoch, i * self.args.batch_size + image.data.shape[0]))
         print("Acc:{}, Acc_class:{}, mIoU:{}, fwIoU: {}".format(Acc, Acc_class, mIoU, FWIoU))
         print('Loss: %.3f' % test_loss)
-        wandb.log({"test loss": test_loss, "mIOU": mIoU})
+        # wandb.log({"test loss": test_loss, "mIOU": mIoU})
 
         new_pred = mIoU
         if new_pred > self.best_pred:
@@ -273,6 +273,13 @@ def main():
                         help='coefficient for logits loss')
     parser.add_argument('--ic_lambda', type=float, default=None,
                         help='coefficient for inter class loss')
+    parser.add_argument('--both_simmam_loss', type=float, default=None,
+                        help='')
+    parser.add_argument('--t_simmam_loss', type=float, default=None,
+                        help='')
+    parser.add_argument('--both_simmam_kld_loss', type=float, default=None,
+                        help='')
+
     
     parser.add_argument('--teacher_path', type=str, default='/kaggle/working/checkpoint.pth.tar',
                         help='path to the pretrained teache')
