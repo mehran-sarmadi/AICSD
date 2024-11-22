@@ -109,10 +109,10 @@ class Trainer(object):
         tbar = tqdm(self.train_loader)
         num_img_tr = len(self.train_loader)
 
-        # if epoch == 0:
-        #     optimizer = self.init_optimizer
-        # else:
-        optimizer = self.optimizer
+        if epoch == 0:
+            optimizer = self.init_optimizer
+        else:
+            optimizer = self.optimizer
 
         for i, sample in enumerate(tbar):
             image, target = sample['image'], sample['label']
