@@ -102,8 +102,13 @@ class Distiller(nn.Module):
         if self.args.both_simmam_loss is not None:
             t_simam = self.simam(t_feats[-1])
             s_simam = self.simam(s_feats[-1])
+            t_simam_3 = self.simam(t_feats[-3])
+            s_simam_3 = self.simam(self.Connectors[-3](s_feats[-3]))
             b,c,h,w = t_simam.shape
-            both_simmam_loss = self.args.both_simmam_loss * (s_simam / torch.norm(s_simam, p = 2) - t_simam / torch.norm(t_simam, p = 2)).pow(2).sum() / (b)
+            both_simmam_loss += (s_simam / torch.norm(s_simam, p = 2) - t_simam / torch.norm(t_simam, p = 2)).pow(2).sum() / (b)
+            b,c,h,w = t_simam_3.shape
+            both_simmam_loss += (s_simam_3 / torch.norm(s_simam_3, p = 2) - t_simam_3 / torch.norm(t_simam_3, p = 2)).pow(2).sum() / (b)
+            both_simmam_loss = self.args.both_simmam_loss * both_simmam_loss
 
         t_simmam_loss = 0 
         if self.args.t_simmam_loss is not None:
