@@ -100,7 +100,7 @@ class Distiller(nn.Module):
 
         both_simmam_loss = 0 
         if self.args.both_simmam_loss is not None:
-            for i in range(feat_num):
+            for i in range(3, feat_num):
                 b,c,h,w = t_feats[i].shape
                 t_simam = self.simam(t_feats[i])
                 s_simam = self.simam(self.Connectors[i](s_feats[i]))
