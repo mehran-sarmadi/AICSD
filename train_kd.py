@@ -341,7 +341,7 @@ def main():
         if not trainer.args.no_val and epoch % args.eval_interval == (args.eval_interval - 1):
             trainer.validation(epoch)
             
-    wandb.finish()
+    # wandb.finish()
 
 
 if __name__ == "__main__":
