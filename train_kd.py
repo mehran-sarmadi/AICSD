@@ -121,17 +121,16 @@ class Trainer(object):
                 image, target = image.cuda(), target.cuda()
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
-            
+
+            ###############################default##################################
+            # output, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss = self.d_net(image)
+            # loss_seg = self.criterion(output, target)
+            # loss = loss_seg + both_simmam_loss + t_simmam_loss + both_simmam_kld_loss
+            ###############################adaptive##################################
             output, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss = self.d_net(image)
             loss_seg = self.criterion(output, target)
-            # print(loss_seg, loss_simam)
-            ########### uncomment lines below for ALW ##################
-            #alpha = epoch/120
-            #loss = alpha * (loss_seg + lo_loss) + (1-alpha) * pi_loss
-            
-            ############# Comment line blow in case of ALW ################
             loss = loss_seg + both_simmam_loss + t_simmam_loss + both_simmam_kld_loss
-            
+            #################################################################            
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
