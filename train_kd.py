@@ -133,8 +133,8 @@ class Trainer(object):
             def my_sigmoid(x):
                 return 2 / (1 + torch.exp(4 * x))
             adaptive_coef = my_sigmoid(t_loss_seg)
-            print(f"a_c = {adaptive_coef} and t_loss = {t_loss_seg}")
-            loss = loss_seg + adaptive_coef * (both_simmam_loss + t_simmam_loss + both_simmam_kld_loss)
+            # print(f"a_c = {adaptive_coef} and t_loss = {t_loss_seg}")
+            loss = t_loss_seg + adaptive_coef * (both_simmam_loss + t_simmam_loss + both_simmam_kld_loss)
             #################################################################            
             loss.backward()
             optimizer.step()
