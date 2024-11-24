@@ -127,9 +127,13 @@ class Trainer(object):
             # loss_seg = self.criterion(output, target)
             # loss = loss_seg + both_simmam_loss + t_simmam_loss + both_simmam_kld_loss
             ###############################adaptive##################################
-            output, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss = self.d_net(image)
-            loss_seg = self.criterion(output, target)
-            loss = loss_seg + both_simmam_loss + t_simmam_loss + both_simmam_kld_loss
+            t_out, s_out, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss = self.d_net(image)
+            t_loss_seg = self.criterion(t_out, target).detach()
+            s_loss_seg = self.criterion(s_out, target)
+            def my_sigmoid(x):
+                return 2 / (1 + torch.exp(4 * x))
+            adaptive_coef = my_sigmoid(t_loss_seg)
+            loss = loss_seg + adaptive_coef * (both_simmam_loss + t_simmam_loss + both_simmam_kld_loss)
             #################################################################            
             loss.backward()
             optimizer.step()
