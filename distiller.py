@@ -130,5 +130,5 @@ class Distiller(nn.Module):
             both_simmam_kld_loss =  self.args.both_simmam_kld_loss * torch.nn.KLDivLoss()(F.log_softmax(t_simam / self.temperature, dim=1), F.softmax(s_simam / self.temperature, dim=1))
 
         # print(both_simmam_loss, t_simmam_loss, both_simmam_kld_loss)
-        return s_out, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss
+        return t_out, s_out, both_simmam_loss, t_simmam_loss, both_simmam_kld_loss
 
