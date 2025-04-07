@@ -1,0 +1,15 @@
+{"time":"2025-04-07T06:05:30.185667451Z","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user01/AICSD/wandb/offline-run-20250407_060530-ky7stax6/logs/debug-core.log"}
+{"time":"2025-04-07T06:05:30.288931688Z","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-04-07T06:05:30.288986138Z","level":"INFO","msg":"created new stream","id":"ky7stax6"}
+{"time":"2025-04-07T06:05:30.289007098Z","level":"INFO","msg":"stream: started","id":"ky7stax6"}
+{"time":"2025-04-07T06:05:30.289021798Z","level":"INFO","msg":"writer: Do: started","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:30.289056028Z","level":"INFO","msg":"handler: started","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:30.289080018Z","level":"INFO","msg":"sender: started","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:30.291484927Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-07T06:05:31.293587009Z","level":"INFO","msg":"stream: closing","id":"ky7stax6"}
+{"time":"2025-04-07T06:05:31.293604809Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-07T06:05:31.293640738Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-07T06:05:31.293699189Z","level":"INFO","msg":"handler: closed","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:31.293704649Z","level":"INFO","msg":"writer: Close: closed","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:31.293728269Z","level":"INFO","msg":"sender: closed","stream_id":"ky7stax6"}
+{"time":"2025-04-07T06:05:31.293736129Z","level":"INFO","msg":"stream: closed","id":"ky7stax6"}

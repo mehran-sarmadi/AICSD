@@ -1,0 +1,15 @@
+{"time":"2025-04-07T06:08:39.016593934Z","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/user01/AICSD/wandb/offline-run-20250407_060839-ajft46cv/logs/debug-core.log"}
+{"time":"2025-04-07T06:08:39.118582512Z","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-04-07T06:08:39.118654002Z","level":"INFO","msg":"created new stream","id":"ajft46cv"}
+{"time":"2025-04-07T06:08:39.118672742Z","level":"INFO","msg":"stream: started","id":"ajft46cv"}
+{"time":"2025-04-07T06:08:39.118750222Z","level":"INFO","msg":"writer: Do: started","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:39.118757972Z","level":"INFO","msg":"handler: started","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:39.118784832Z","level":"INFO","msg":"sender: started","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:39.121525611Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-07T06:08:40.123868482Z","level":"INFO","msg":"stream: closing","id":"ajft46cv"}
+{"time":"2025-04-07T06:08:40.123894422Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-07T06:08:40.123947232Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-07T06:08:40.124015092Z","level":"INFO","msg":"handler: closed","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:40.124022632Z","level":"INFO","msg":"writer: Close: closed","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:40.124047702Z","level":"INFO","msg":"sender: closed","stream_id":"ajft46cv"}
+{"time":"2025-04-07T06:08:40.124105432Z","level":"INFO","msg":"stream: closed","id":"ajft46cv"}
