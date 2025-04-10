@@ -34,7 +34,7 @@ class Trainer(object):
                              sync_bn=args.sync_bn,
                              freeze_bn=args.freeze_bn,
                              is_student = False)
-        checkpoint = torch.load('pretrained/deeplab-resnet.pth.tar')
+        checkpoint = torch.load('/home/user01/teacher/amir-teacher/deeplab-resnet.pth.tar')
         self.t_net.load_state_dict(checkpoint['state_dict'])
 
         self.s_net = DeepLab(num_classes=self.nclass,
