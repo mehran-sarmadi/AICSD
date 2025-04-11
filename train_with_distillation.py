@@ -15,6 +15,9 @@ from utils.metrics import Evaluator
 
 import distiller
 
+def my_sigmoid(x):
+    return 2 / (1 + torch.exp(4 * x))
+
 class Trainer(object):
     def __init__(self, args):
         self.args = args
@@ -123,7 +126,7 @@ class Trainer(object):
                 image, target = image.cuda(), target.cuda()
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
-            output, kd_loss, minibatch_pixel_contrast_loss, \
+            t_out, s_out, kd_loss, minibatch_pixel_contrast_loss, \
             memory_pixel_contrast_loss, memory_region_contrast_loss = self.d_net(image, target)
 
             # reduce all losses 
@@ -133,9 +136,14 @@ class Trainer(object):
             memory_region_contrast_loss = memory_region_contrast_loss.sum() / batch_size
 
 
-            loss_seg = self.criterion(output, target)
-
-            loss = loss_seg + kd_loss + minibatch_pixel_contrast_loss + memory_pixel_contrast_loss 
+            s_loss_seg = self.criterion(s_out, target)
+            if self.args.adaptive:
+                t_loss_seg = self.criterion(t_out, target).detach()
+                adaptive_coef = my_sigmoid(t_loss_seg)
+                loss = s_loss_seg + adaptive_coef * (pkd_loss + minibatch_pixel_contrast_loss + memory_pixel_contrast_loss 
+            + memory_region_contrast_loss)
+            else:
+                loss = s_loss_seg + kd_loss + minibatch_pixel_contrast_loss + memory_pixel_contrast_loss 
             + memory_region_contrast_loss
 
 
@@ -273,6 +281,8 @@ def main():
 
     parser.add_argument('--no-val', action='store_true', default=False,
                         help='skip validation during training')
+    parser.add_argument('--adaptive', action='store_true', default=False,
+                        help='add adaptive coefficient')
 
     args = parser.parse_args()
     args.cuda = not args.no_cuda and torch.cuda.is_available()

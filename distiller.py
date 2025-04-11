@@ -120,5 +120,5 @@ class Distiller(nn.Module):
         memory_pixel_contrast_loss, memory_region_contrast_loss = \
             self.criterion_memory_contrast(s_feats[-2], t_feats[-2].detach(), y, predict)
         
-        return s_out, kd_loss, minibatch_pixel_contrast_loss, \
+        return t_out, s_out, kd_loss, minibatch_pixel_contrast_loss, \
             memory_pixel_contrast_loss, memory_region_contrast_loss
