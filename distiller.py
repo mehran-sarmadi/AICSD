@@ -100,4 +100,4 @@ class Distiller(nn.Module):
                 simam_loss += (s_simam / torch.norm(s_simam, p = 2) - t_simam / torch.norm(t_simam, p = 2)).pow(2).sum() / (b)
             simam_loss = self.args.simam_lambda * simam_loss
                         
-        return s_out, simam_loss
+        return t_out, s_out, simam_loss

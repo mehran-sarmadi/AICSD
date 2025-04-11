@@ -16,6 +16,11 @@ from utils.metrics import Evaluator
 
 import distiller
 
+
+def my_sigmoid(x):
+    return 2 / (1 + torch.exp(4 * x))
+
+
 class Trainer(object):
     def __init__(self, args):
         self.args = args
@@ -122,15 +127,15 @@ class Trainer(object):
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
             
-            output, simam_loss = self.d_net(image)
-            loss_seg = self.criterion(output, target)
+            t_out, s_out, simam_loss = self.d_net(image)
+            s_loss_seg = self.criterion(s_out, target)
             
-            ########### uncomment lines below for ALW ##################
-            #alpha = epoch/120
-            #loss = alpha * (loss_seg + lo_loss) + (1-alpha) * pi_loss
-            
-            ############# Comment line blow in case of ALW ################
-            loss = loss_seg + simam_loss
+            if self.args.adaptive:
+                t_loss_seg = self.criterion(t_out, target).detach()
+                adaptive_coef = my_sigmoid(t_loss_seg)
+                loss = s_loss_seg + adaptive_coef * (simam_loss)
+            else:
+                loss = s_loss_seg + simam_loss
             
             loss.backward()
             optimizer.step()
@@ -278,6 +283,8 @@ def main():
 
     parser.add_argument('--teacher_path', type=str, default='/kaggle/working/checkpoint.pth.tar',
                         help='path to the pretrained teache')
+    parser.add_argument('--adaptive', action='store_true', default=False,
+                        help='add adaptive coefficient')
 
     args = parser.parse_args()
     args.cuda = not args.no_cuda and torch.cuda.is_available()
