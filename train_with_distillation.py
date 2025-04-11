@@ -15,6 +15,11 @@ from utils.metrics import Evaluator
 
 import distiller
 
+
+def my_sigmoid(x):
+    return 2 / (1 + torch.exp(4 * x))
+
+
 class Trainer(object):
     def __init__(self, args):
         self.args = args
@@ -121,11 +126,17 @@ class Trainer(object):
                 image, target = image.cuda(), target.cuda()
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
-            output, loss_cbam, dist_loss = self.d_net(image, target)
+            t_out, s_out, loss_cbam, dist_loss = self.d_net(image, target)
 
-            loss_seg = self.criterion(output, target)
+            s_loss_seg = self.criterion(s_out, target)
 
-            loss = loss_seg + dist_loss.sum() / batch_size
+            if self.args.adaptive:
+                t_loss_seg = self.criterion(t_out, target).detach()
+                adaptive_coef = my_sigmoid(t_loss_seg)
+                loss = s_loss_seg + adaptive_coef * (dist_loss.sum() / batch_size)
+
+            else:
+                loss = s_loss_seg + dist_loss.sum() / batch_size
 
 
             loss.backward()
@@ -259,6 +270,8 @@ def main():
                         help='evaluuation interval (default: 1)')
     parser.add_argument('--no-val', action='store_true', default=False,
                         help='skip validation during training')
+    parser.add_argument('--adaptive', action='store_true', default=False,
+                        help='add adaptive coefficient')
 
     args = parser.parse_args()
     args.cuda = not args.no_cuda and torch.cuda.is_available()

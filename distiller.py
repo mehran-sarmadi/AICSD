@@ -140,4 +140,4 @@ class Distiller(nn.Module):
             
         # loss_cbam = loss_cbam / 2
 
-        return s_out, loss_cbam, dist_loss
+        return t_out, s_out, loss_cbam, dist_loss
