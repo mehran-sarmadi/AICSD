@@ -15,6 +15,9 @@ from utils.metrics import Evaluator
 
 import distiller
 
+def my_sigmoid(x):
+    return 2 / (1 + torch.exp(4 * x))
+
 class Trainer(object):
     def __init__(self, args):
         self.args = args
@@ -124,11 +127,16 @@ class Trainer(object):
             self.scheduler(optimizer, i, epoch, self.best_pred)
             optimizer.zero_grad()
 
-            output, kd_loss, lad_loss, pad_loss, cad_loss, naive_loss, cbam_loss, self_loss, emma_loss = self.d_net(image, target)
+            t_out, s_out, kd_loss, lad_loss, pad_loss, cad_loss, naive_loss, cbam_loss, self_loss, emma_loss = self.d_net(image, target)
 
-            loss_seg = self.criterion(output, target)
+            s_loss_seg = self.criterion(s_out, target)
 
-            loss = loss_seg + naive_loss + kd_loss + lad_loss + pad_loss + cad_loss + cbam_loss + self_loss + emma_loss
+            if self.args.adaptive:
+                t_loss_seg = self.criterion(t_out, target).detach()
+                adaptive_coef = my_sigmoid(t_loss_seg)
+                loss = s_loss_seg + adaptive_coef * (naive_loss + kd_loss + lad_loss + pad_loss + cad_loss + cbam_loss + self_loss + emma_loss)
+            else:
+                loss = loss_seg + naive_loss + kd_loss + lad_loss + pad_loss + cad_loss + cbam_loss + self_loss + emma_loss
 
             loss.backward()
             optimizer.step()
@@ -286,6 +294,8 @@ def main():
                         help = 'coefficient for self attention loss')
     parser.add_argument('--ema_lambda', type = float, default = None,
                         help = 'coefficient for ema loss')
+    parser.add_argument('--adaptive', action='store_true', default=False,
+                        help='add adaptive coefficient')
 
     args = parser.parse_args()
     args.cuda = not args.no_cuda and torch.cuda.is_available()

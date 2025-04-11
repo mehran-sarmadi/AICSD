@@ -203,7 +203,7 @@ class Distiller(nn.Module):
                 naive_loss += (s_feats[i] - t_feats[i]).pow(2).sum() / (h * w * c* b) * self.args.naive_lambda
 
 
-        return s_out, kd_loss , lad_loss , pad_loss , cad_loss , naive_loss, cbam_loss, self_att_loss, ema_loss
+        return t_out, s_out, kd_loss , lad_loss , pad_loss , cad_loss , naive_loss, cbam_loss, self_att_loss, ema_loss
 
     
 
